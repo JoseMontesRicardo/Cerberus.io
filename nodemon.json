@@ -1,0 +1,6 @@
+{
+  "env": {
+    "node_env": "develop",
+    "port": 5500
+  }
+}
