@@ -1,6 +1,9 @@
 import * as Express from 'express';
 import * as Http from 'http';
 import * as cors from 'cors';
+import * as Path from 'path';
+import { PathHelper } from '../helpers';
+import { LoaderUtil } from '../utils';
 
 class Server {
 
@@ -27,8 +30,7 @@ class Server {
 	 * config server here.
 	 */
 	private configServer(): void {
-		this.app.use(cors());
-		this.app.set('port', process.env.port);
+		this.loadDependencies(this.app);
 	}
 
 	/**
@@ -41,6 +43,32 @@ class Server {
 		this.app.server.listen(process.env.port, () => {
 			console.log(`Running ${process.env.port}`)
 		});
+	}
+
+	/**
+	 * 
+	 * 
+	 * @param {any} app 
+	 */
+	private loadDependencies(app: any): void {
+		try {
+			let serverDependecies = LoaderUtil.listAllFiles(PathHelper.configPath);
+			let configFileLoaded;
+
+			for (const key in serverDependecies) {
+				if (serverDependecies.hasOwnProperty(key)) {
+					const file = serverDependecies[key].toString();
+					let fileName = Path.basename(file);
+					if (file.indexOf('server') !== -1) {
+						configFileLoaded = require(file).default(app);
+					}
+				}
+			}
+		} catch (error) {
+			console.error(error);
+			throw new Error(error);
+		}
+
 	}
 
 

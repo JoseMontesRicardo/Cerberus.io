@@ -10,6 +10,10 @@ class PathHelper {
         return `${PathHelper.rootSrcPath}/API`;
     }
     
+    public static get configPath(): String {
+        return `${PathHelper.rootSrcPath}/config`;
+    }
+
     public static get corePath(): String {
         return `${PathHelper.rootSrcPath}/@core`;
     }
