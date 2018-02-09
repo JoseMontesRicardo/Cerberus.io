@@ -5,7 +5,11 @@ class PathHelper {
     public static get rootSrcPath(): String {
         return `${appRootPath}/src`;
     }
-
+    
+    public static get apiPath(): String {
+        return `${PathHelper.rootSrcPath}/API`;
+    }
+    
     public static get corePath(): String {
         return `${PathHelper.rootSrcPath}/@core`;
     }
@@ -17,6 +21,11 @@ class PathHelper {
     public static get serverPath(): String {
         return `${PathHelper.corePath}/server`;
     }
+
+    public static get routesPath(): String {
+        return `${PathHelper.apiPath}/routes`;
+    }
+
 
 }
 

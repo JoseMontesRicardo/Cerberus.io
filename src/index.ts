@@ -1,15 +1,11 @@
 import {Server} from './@core/server';
-import Utils from './@core/utils/LoaderUtil';
-import PathHelper from './@core/helpers/PathHelper';
+import {LoaderUtil} from './@core/utils/';
+import {PathHelper} from './@core/helpers';
 
 //definicion server
 let serveObj = new Server();
 
-console.log(PathHelper.rootSrcPath)
-console.log(PathHelper.corePath)
-// console.log(PathHelper.serverPath)
-// console.log(PathHelper.utilsPath)
-
+console.log(LoaderUtil.listAllFiles(PathHelper.apiPath));
 
 let httpServer = serveObj.getHttpServer();
 
