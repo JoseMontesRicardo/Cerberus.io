@@ -11,7 +11,7 @@ class LoaderUtil extends BaseUtil {
 	 * @return {any} objet with files loaded 
 	 */
 	public static loadFiles(pathOfFolder): any {
-		const ext = '.ts';
+		const ext = global.extensionLoader;
 		let paths = [];
 		let moduleExports = {};
 		let files = Fs.readdirSync(pathOfFolder);

@@ -61,6 +61,7 @@ class Server {
 					let fileName = Path.basename(file);
 					if (file.indexOf('server') !== -1) {
 						configFileLoaded = require(file).default(app);
+						// configFileLoaded = require(file).default(app);
 					}
 				}
 			}

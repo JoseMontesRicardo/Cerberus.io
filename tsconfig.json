@@ -1,21 +1,27 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
-    "outDir": "./dist/",
-    "sourceMap": true,
+    "outDir": "./dist",
+    "rootDir": "./src",
+    "sourceMap": false,
     "declaration": false,
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "allowSyntheticDefaultImports": true,
-    "target": "es6",
+    "target": "es5",
     "allowJs": true,
     "typeRoots": [
       "node_modules/@types"
     ],
     "lib": [
-      "es2017",
+      "es5",
       "dom"
     ]
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "webpack.config.js",
+    "dist"
+  ]
 }

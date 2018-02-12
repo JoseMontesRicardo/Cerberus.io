@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "tsc",
+    "build-wp": "webpack",
     "watcher": "nodemon ./src/index.ts --exec ts-node",
-    "server": "port=5500 node_env=production node ./dist/bundle.js"
+    "server": "port=5500 node_env=production node ./dist/index.js"
   },
   "repository": {
     "type": "git",

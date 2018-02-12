@@ -1,11 +1,10 @@
 import {Server} from './@core/server';
-// import {LoaderUtil} from './@core/utils/';
-// import {PathHelper} from './@core/helpers';
 
-//definicion server
+global.extensionLoader = (process.env.node_env === 'production') ? '.js': (process.env.node_env === 'develop') ? '.ts' : '.ts' ;
+global.tempSrcPath = (process.env.node_env === 'production') ? 'dist': (process.env.node_env === 'develop') ? 'src' : 'src' ;
+
+//server
 let serveObj = new Server();
-
-// console.log(LoaderUtil.listAllFiles(PathHelper.apiPath));
 
 let httpServer = serveObj.getHttpServer();
 

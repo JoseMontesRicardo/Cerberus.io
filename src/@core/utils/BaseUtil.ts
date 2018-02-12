@@ -39,7 +39,7 @@ class BaseUtil {
 	 */
 	public static walkDir(currentPath: String, array: Array<String>): Array<String> {
 		try {
-			const ext = '.ts';
+			const ext = global.extensionLoader;
 
 			for (var index = 0; index < currentPath.length; index++) {
 				if (Fs.statSync(currentPath[index]).isDirectory()) {

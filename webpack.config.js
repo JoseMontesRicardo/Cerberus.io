@@ -9,7 +9,7 @@ module.exports = {
 	entry: {
 		path: glob.sync('./src/**/*.ts'),
 	},
-	// devtool: 'inline-source-map',
+	devtool: 'inline-source-map',
 	module: {
 		rules: [
 			{
@@ -24,6 +24,6 @@ module.exports = {
 	},
 	output: {
 		filename: 'bundle.js',
-		path: path.resolve(__dirname, 'dist')
+		path: path.resolve(__dirname, 'dist2')
 	}
 };

@@ -3,7 +3,7 @@ import * as appRootPath from 'app-root-path';
 class PathHelper {
 
     public static get rootSrcPath(): String {
-        return `${appRootPath}/src`;
+        return `${appRootPath}/${global.tempSrcPath}`;
     }
     
     public static get apiPath(): String {
