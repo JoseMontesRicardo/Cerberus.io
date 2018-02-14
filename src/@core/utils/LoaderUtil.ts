@@ -1,5 +1,6 @@
 import * as Fs from 'fs';
 import * as Path from 'path';
+import {PathHelper} from '../helpers';
 import BaseUtil from './BaseUtil';
 
 class LoaderUtil extends BaseUtil {
@@ -36,25 +37,26 @@ class LoaderUtil extends BaseUtil {
 	 * @param {String} pathOfFolder 
 	 * @param {any} app
 	 */
-	public static loadAllRoutes(routesPath: String, app: any): void {
+	public static loadAllRoutes(expressRouter: any): void {
 		try {
-			// const ext = '.ts';
-			// let classFiles = Util.listAllFiles(path);
-			// let classFilesRequired = {};
-			// let fileName = '';
-			// let fileNameWithoutExt = '';
-			// let pathFile = '';
+			const ext = global.extensionLoader;
+			const routesPath = PathHelper.routesPath;
+			let classFiles = BaseUtil.listAllFiles(routesPath);
+			let classFilesRequired = {};
+			let fileName = '';
+			let fileNameWithoutExt = '';
+			let pathFile = '';
 
-			// for (var index = 0; index < classFiles.length; index++) {
-			// 	fileName = Path.basename(classFiles[index]);
-			// 	pathFile = classFiles[index];
-			// 	fileNameWithoutExt = Path.basename(pathFile, ext);
-
-			// 	if (fileName.indexOf('Route') !== -1) {
-			// 		classFilesRequired[fileNameWithoutExt] = require(pathFile).default;
-			// 		new classFilesRequired[fileNameWithoutExt](app);
-			// 	}
-			// }
+			for (var index = 0; index < classFiles.length; index++) {
+				fileName = Path.basename(classFiles[index]);
+				pathFile = classFiles[index];
+				fileNameWithoutExt = Path.basename(pathFile, ext);
+				
+				if (fileName.indexOf('Route') !== -1) {
+					classFilesRequired[fileNameWithoutExt] = require(pathFile).default;
+					new classFilesRequired[fileNameWithoutExt](expressRouter);
+				}
+			}
 
 		} catch (error) {
 			console.log(error);

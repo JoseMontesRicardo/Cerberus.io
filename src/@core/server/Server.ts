@@ -8,14 +8,17 @@ import { LoaderUtil } from '../utils';
 class Server {
 
 	private app: any;
+	private router: any;
 	/**
 	 * constructor
 	 */
 	constructor() {
 		this.app = Express();
-		this.upServer();
+		this.router = Express.Router();
+		this.configServer();
+		// this.upServer();
 	}
-
+	
 	/**
 	 * return app
 	 * 
@@ -24,7 +27,14 @@ class Server {
 	public getHttpServer(): any {
 		return this.app;
 	}
-
+	
+	/**
+	 * return router for app
+	 */
+	public getRouter(): any {
+		return this.router;
+	}
+	
 	/**
 	 * 
 	 * config server here.
@@ -32,19 +42,19 @@ class Server {
 	private configServer(): void {
 		this.loadDependencies(this.app);
 	}
-
+	
 	/**
 	 * 
 	 * up and run server
 	 */
-	private upServer(): void {
-		this.configServer();
+	public upServer(): void {
+		this.app.use(this.router)
 		this.app.server = Http.createServer(this.app);
 		this.app.server.listen(process.env.port, () => {
 			console.log(`Running ${process.env.port}`)
 		});
 	}
-
+	
 	/**
 	 * 
 	 * 

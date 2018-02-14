@@ -15,4 +15,5 @@ export default (app) => {
 	app.use(Cors());
 	app.use(CookieParser());
 	app.use(BodyParser.json({limit: '500mb'}));
+	
 }

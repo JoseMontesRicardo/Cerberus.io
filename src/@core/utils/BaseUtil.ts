@@ -14,7 +14,7 @@ class BaseUtil {
 	 * @param {String} array
 	 * @return {Array<String>}
 	 */
-	public static listAllFiles(currentPath: String, array: Array<String> = []) {
+	public static listAllFiles(currentPath: string, array: Array<string> = []) {
 		try {
 			let files = Glob.sync(currentPath + '/*');
 
@@ -37,7 +37,7 @@ class BaseUtil {
 	 * @param {String} array
 	 * @return {Array<String>}
 	 */
-	public static walkDir(currentPath: String, array: Array<String>): Array<String> {
+	public static walkDir(currentPath: String, array: Array<string>): Array<string> {
 		try {
 			const ext = global.extensionLoader;
 
