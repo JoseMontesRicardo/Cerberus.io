@@ -1,0 +1,33 @@
+#databases configuration here!
+db:
+    default: "connection1"
+
+    connections:
+        - connection1:
+            #package
+            package: "sequelize"
+            #data base
+            data-base:	"schema1"
+            #user
+            user:	"root"
+            #pass
+            pass:	"123456"
+            #host
+            host:	"localhost"
+            #sequalize dialect
+            dialect:	"mysql"
+            #driver
+            driver: "mysql"
+            #default timezone Database
+            timezone:	"America/Bogota"
+
+
+
+        - connection2:
+            package: "mongorito"
+            data-base:	"crawler"
+            user:	""
+            pass:	""
+            host:	"localhost"
+            #mongodb port
+            port:	27017

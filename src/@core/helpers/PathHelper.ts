@@ -2,6 +2,11 @@ import * as appRootPath from 'app-root-path';
 
 class PathHelper {
 
+
+    public static get rootOfProject(): string {
+        return appRootPath.toString();
+    }
+
     public static get rootSrcPath(): string {
         return `${appRootPath}/${global.tempSrcPath}`;
     }

@@ -68,7 +68,7 @@ class LoaderUtil extends BaseUtil {
     }
 
     /**
-	 * load all routes on folder src/API/routes
+	 * 
 	 * 
 	 * @param {String} pathOfFolder 
 	 * @param {any} app
@@ -88,7 +88,7 @@ class LoaderUtil extends BaseUtil {
             let nameOfController = params[0];
             let action = params[1];
 
-            if ( params.length !== 2 ) MessageUtil.errorMsg(`Invalid controller and action ${controllerAndAction}!`)
+            if ( params.length !== 2 ) MessageUtil.errorMsg(`Invalid param "${controllerAndAction}"!`)
             
             controller = `${PathHelper.controllersPath}/${nameOfController}${ext}`;
             fileName = Path.basename(controller);
@@ -101,12 +101,12 @@ class LoaderUtil extends BaseUtil {
                 controllerActions = Object.getOwnPropertyNames(Object.getPrototypeOf(instanceOfController));
                 actionFound = Lodash.find(controllerActions, o => {return o === action});
 
-                if ( !actionFound ) MessageUtil.errorMsg(`Action ${action} not found!`);
+                if ( !actionFound ) MessageUtil.errorMsg(`Action "${action}" not found!`);
 
                 return instanceOfController[actionFound]();
 
             } else {
-                MessageUtil.errorMsg(`Controller ${controller} not found!`)
+                MessageUtil.errorMsg(`Controller "${controller}" not found!`)
             }
 
         } catch (error) {
