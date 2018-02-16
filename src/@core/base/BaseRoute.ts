@@ -10,7 +10,7 @@ class BaseRoute {
 		this.startAllMethods();
 	}
 
-	public get(path, cbParam): void {
+	public get(path: string, cbParam: any): void {
 		if ( typeof cbParam === 'string' ) {
 			let actionLoaded = LoaderUtil.loadAction(cbParam);
 			this.router.get(path, actionLoaded);
@@ -19,7 +19,7 @@ class BaseRoute {
 		}
 	}
 
-	public post(path, cbParam): void {
+	public post(path: string, cbParam: any): void {
 		if ( typeof cbParam === 'string' ) {
 			let actionLoaded = LoaderUtil.loadAction(cbParam);
 			this.router.post(path, actionLoaded);
@@ -28,7 +28,7 @@ class BaseRoute {
 		}
 	}
 
-	public put(path, cbParam): void {
+	public put(path: string, cbParam: any): void {
 		if ( typeof cbParam === 'string' ) {
 			let actionLoaded = LoaderUtil.loadAction(cbParam);
 			this.router.put(path, actionLoaded);
@@ -37,7 +37,7 @@ class BaseRoute {
 		}
 	}
 
-	public patch(path, cbParam): void {
+	public patch(path: string, cbParam: any): void {
 		if ( typeof cbParam === 'string' ) {
 			let actionLoaded = LoaderUtil.loadAction(cbParam);
 			this.router.patch(path, actionLoaded);
@@ -46,7 +46,7 @@ class BaseRoute {
 		}
 	}
 
-	public delete(path, cbParam): void {
+	public delete(path: string, cbParam: any): void {
 		if ( typeof cbParam === 'string' ) {
 			let actionLoaded = LoaderUtil.loadAction(cbParam);
 			this.router.delete(path, actionLoaded);
