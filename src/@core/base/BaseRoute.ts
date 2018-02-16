@@ -10,29 +10,49 @@ class BaseRoute {
 		this.startAllMethods();
 	}
 
-	public get(path, controllerWithAction): void {
-		let actionLoaded = LoaderUtil.loadAction(controllerWithAction);
-		this.router.get(path, actionLoaded);
+	public get(path, cbParam): void {
+		if ( typeof cbParam === 'string' ) {
+			let actionLoaded = LoaderUtil.loadAction(cbParam);
+			this.router.get(path, actionLoaded);
+		} else if (typeof cbParam === 'function') {
+			this.router.get(path, cbParam);
+		}
 	}
 
-	public post(path, controllerWithAction): void {
-		let actionLoaded = LoaderUtil.loadAction(controllerWithAction);
-		this.router.post(path, actionLoaded);
+	public post(path, cbParam): void {
+		if ( typeof cbParam === 'string' ) {
+			let actionLoaded = LoaderUtil.loadAction(cbParam);
+			this.router.post(path, actionLoaded);
+		} else if (typeof cbParam === 'function') {
+			this.router.post(path, cbParam);
+		}
 	}
 
-	public put(path, controllerWithAction): void {
-		let actionLoaded = LoaderUtil.loadAction(controllerWithAction);
-		this.router.put(path, actionLoaded);
+	public put(path, cbParam): void {
+		if ( typeof cbParam === 'string' ) {
+			let actionLoaded = LoaderUtil.loadAction(cbParam);
+			this.router.put(path, actionLoaded);
+		} else if (typeof cbParam === 'function') {
+			this.router.put(path, cbParam);
+		}
 	}
 
-	public patch(path, controllerWithAction): void {
-		let actionLoaded = LoaderUtil.loadAction(controllerWithAction);
-		this.router.patch(path, actionLoaded);
+	public patch(path, cbParam): void {
+		if ( typeof cbParam === 'string' ) {
+			let actionLoaded = LoaderUtil.loadAction(cbParam);
+			this.router.patch(path, actionLoaded);
+		} else if (typeof cbParam === 'function') {
+			this.router.patch(path, cbParam);
+		}
 	}
 
-	public delete(path, controllerWithAction): void {
-		let actionLoaded = LoaderUtil.loadAction(controllerWithAction);
-		this.router.delete(path, actionLoaded);
+	public delete(path, cbParam): void {
+		if ( typeof cbParam === 'string' ) {
+			let actionLoaded = LoaderUtil.loadAction(cbParam);
+			this.router.delete(path, actionLoaded);
+		} else if (typeof cbParam === 'function') {
+			this.router.post(path, cbParam);
+		}
 	}
 
 	public get nameRoute() {

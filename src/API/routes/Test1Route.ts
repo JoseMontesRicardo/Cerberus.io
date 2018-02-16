@@ -15,6 +15,7 @@ class Test1Route extends BaseRoute {
 	*/
 	routesInit() {
 		this.get(`/${this.nameRoute}`, 'Test1Controller->index');
+		// this.get(`/${this.nameRoute}`, async (req, res) => { res.send('hola') });
 		this.get(`/${this.nameRoute}/:id`, 'Test1Controller->show');
 		this.post(`/${this.nameRoute}`, 'Test1Controller->store');
 		this.put(`/${this.nameRoute}/:id`, 'Test1Controller->update');
