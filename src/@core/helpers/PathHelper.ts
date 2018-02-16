@@ -30,6 +30,10 @@ class PathHelper {
         return `${PathHelper.apiPath}/routes`;
     }
 
+    public static get controllersPath(): string {
+        return `${PathHelper.apiPath}/controllers`;
+    }
+
 
 }
 

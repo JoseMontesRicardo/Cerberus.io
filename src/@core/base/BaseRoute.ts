@@ -1,3 +1,5 @@
+import PathHelper from '../helpers/PathHelper';
+import LoaderUtil from '../utils/LoaderUtil';
 
 class BaseRoute {
 
@@ -8,29 +10,35 @@ class BaseRoute {
 		this.startAllMethods();
 	}
 
-	public get(path, callBack): void {
-		this.router.get(path, callBack);
+	public get(path, controllerWithAction): void {
+		let actionLoaded = LoaderUtil.loadAction(controllerWithAction);
+		this.router.get(path, actionLoaded);
 	}
 
-	public post(path, callBack): void {
-		this.router.post(path, callBack);
+	public post(path, controllerWithAction): void {
+		let actionLoaded = LoaderUtil.loadAction(controllerWithAction);
+		this.router.post(path, actionLoaded);
 	}
 
-	public put(path, callBack): void {
-		this.router.put(path, callBack);
+	public put(path, controllerWithAction): void {
+		let actionLoaded = LoaderUtil.loadAction(controllerWithAction);
+		this.router.put(path, actionLoaded);
 	}
 
-	public patch(path, callBack): void {
-		this.router.patch(path, callBack);
+	public patch(path, controllerWithAction): void {
+		let actionLoaded = LoaderUtil.loadAction(controllerWithAction);
+		this.router.patch(path, actionLoaded);
 	}
 
-	public delete(path, callBack): void {
-		this.router.delete(path, callBack);
+	public delete(path, controllerWithAction): void {
+		let actionLoaded = LoaderUtil.loadAction(controllerWithAction);
+		this.router.delete(path, actionLoaded);
 	}
 
 	public get nameRoute() {
 		return this.constructor.name.toLowerCase();
 	}
+
 
 	public objectForResources(path): Array<any> {
 		return [
@@ -42,7 +50,7 @@ class BaseRoute {
 		]
 	}
 
-	public startAllMethods() {
+	public startAllMethods(): void {
 		let functions = Object.getOwnPropertyNames(Object.getPrototypeOf(this));
 		let cont = 0;
 
