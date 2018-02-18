@@ -13,8 +13,7 @@ class MessageUtil {
     }
 
     public static errorMsg (message) {
-
-        console.error( Chalk.red.bold( `[ERROR] ${message}`) );
+        console.error( Chalk.red.bold( `[ERROR] ${message}`), message );
         throw new Error(message);
     }
 

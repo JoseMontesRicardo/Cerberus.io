@@ -1,48 +1,78 @@
 import * as Sequelize from 'sequelize';
 import * as Mongorito from 'mongorito';
 import * as Lodash from 'lodash';
-import LoaderUtil from './LoaderUtil';
-import MessageUtil from './MessageUtil';
+import LoaderUtil from '../utils/LoaderUtil';
+import MessageUtil from '../utils/MessageUtil';
 
-class ConnectionUtil {
-    
+class ConnectionHelper {
+
     /**
      * constructor
      */
     constructor() {
     }
-    
-    
+
+
+    /**
+     * test connections.
+     * 
+     * @param connection instance of connection.
+     * @param packageConnection database package.
+     * @return {Promise} Promise object represents success or fail
+     */
+    private testConnection(connection, packageConnection): Promise<any> {
+        return new Promise(async (resolve, reject) => {
+            try {
+                switch (packageConnection) {
+                    case "sequelize":
+                        await connection.authenticate();
+                        break;
+                    case "mongorito":
+                        await connection.connect();
+                        break;
+                    default:
+                        break;
+                }
+                return resolve(true);
+            } catch (error) {
+                MessageUtil.errorMsg(error);
+                return reject(error);
+            }
+        })
+    }
+
+
     /**
      * take all params of connections from .enviroment.yaml and create connections.
      *  
      * @returns {Promise} Promise object represents the successfull connections and default connection
      */
-    public startConnections(): any {
+    public startConnections(): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
                 let connectionsStarted = [];
-                
+
                 let { arrayOfConnections, connectionDefault } = await this.readConnections();
+
                 if (connectionDefault === null) {
-                    for (var key in arrayOfConnections[0]) {
-                        connectionDefault = key;
-                    }
+                    if (!arrayOfConnections) MessageUtil.errorMsg('cannot be selected a connection!');
+                    let key = Lodash.keys(arrayOfConnections[0])[0];
                 }
 
-                for (let key in arrayOfConnections) {
+                for (const key in arrayOfConnections) {
                     if (arrayOfConnections.hasOwnProperty(key)) {
-                        let params = arrayOfConnections[key];
+                        const params = arrayOfConnections[key];
                         for (var connectionName in params) {
-                            connectionsStarted.push({ 
-                                name: connectionName, 
+                            connectionsStarted.push({
+                                name: connectionName,
                                 package: params[connectionName].package,
-                                connection: await this.getConnections(params[connectionName]) 
+                                connection: await this.getConnection(params[connectionName])
                             });
                         }
                     }
                 }
-                return resolve({connectionsStarted, connectionDefault});
+
+                return resolve({ connectionsStarted, connectionDefault });
             } catch (error) {
                 console.error(error);
                 reject(error);
@@ -50,14 +80,14 @@ class ConnectionUtil {
         })
     }
 
-    
+
     /**
-     * create connection for each config in .enviroment.yaml 
+     * create connection with especific params.
      * 
      * @param {json} options params for each connection from .enviroment.yaml
-     * @returns {Promise} Promise object represents the connection for each config
+     * @returns {Promise} Promise object represents the instnce of connection
      */
-    public getConnections(options) {
+    public getConnection(options): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
                 let dbConnection = null;
@@ -66,8 +96,9 @@ class ConnectionUtil {
                         dbConnection = new Sequelize(options['data-base'], options['user'], options['pass'], {
                             host: options['host'],
                             dialect: options['dialect'],
-                            timezone: options['timezone']? options['timezone'] : 'Europe/London'
+                            timezone: options['timezone'] ? options['timezone'] : 'Europe/London'
                         });
+                        await this.testConnection(dbConnection, 'sequelize')
                         break;
                     case "mongorito":
                         dbConnection = new Mongorito(`mongodb://${options['host']}:${options['port']}/${options['data-base']}?connectTimeoutMS=52000000`);
@@ -75,12 +106,12 @@ class ConnectionUtil {
                         break;
 
                     default:
-                        console.log('Invalid Package!')
+                        MessageUtil.errorMsg('Invalid Package!');
                         break;
                 }
                 return resolve(dbConnection);
             } catch (error) {
-                console.log(error);
+                MessageUtil.errorMsg(error);
                 reject(error);
             }
         })
@@ -88,12 +119,12 @@ class ConnectionUtil {
 
 
     /**
-     * Read and return all connection configs from .enviroment.yaml 
+     * Read .enviroment.yaml and return promise with connections
      * and the default connection.
      * 
      * @returns {Promise} Promise object represents the connections and default conection
      */
-    public readConnections(): any {
+    public readConnections(): Promise<any> {
         return new Promise(async (resolve, reject) => {
             try {
                 let envFile = await LoaderUtil.loadEnviroment();
@@ -107,6 +138,7 @@ class ConnectionUtil {
                         }
 
                         let arrayOfConnections = envFile['db']['connections'];
+
                         return resolve({ arrayOfConnections, connectionDefault });
                     } else {
                         MessageUtil.errorMsg('Property Connections not found!');
@@ -115,7 +147,7 @@ class ConnectionUtil {
                     MessageUtil.errorMsg('Property db not found!');
                 }
             } catch (error) {
-                console.error(error);
+                MessageUtil.errorMsg(error);
                 return reject(error);
             }
         })
@@ -123,4 +155,4 @@ class ConnectionUtil {
 
 }
 
-export default ConnectionUtil;
+export default ConnectionHelper;

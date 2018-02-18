@@ -18,23 +18,8 @@ class Server {
 		this.configServer();
 		// this.upServer();
 	}
-	
-	/**
-	 * return app
-	 * 
-	 * @return {any} this.app 
-	 */
-	public getHttpServer(): any {
-		return this.app;
-	}
-	
-	/**
-	 * return router for app
-	 */
-	public getRouter(): any {
-		return this.router;
-	}
-	
+
+
 	/**
 	 * 
 	 * config server here.
@@ -42,21 +27,10 @@ class Server {
 	private configServer(): void {
 		this.loadDependencies(this.app);
 	}
-	
+
+
 	/**
-	 * 
-	 * up and run server
-	 */
-	public upServer(): void {
-		this.app.use(this.router)
-		this.app.server = Http.createServer(this.app);
-		this.app.server.listen(process.env.port, () => {
-			console.log(`Running ${process.env.port}`)
-		});
-	}
-	
-	/**
-	 * 
+	 * load config for server.
 	 * 
 	 * @param {any} app 
 	 */
@@ -71,7 +45,6 @@ class Server {
 					let fileName = Path.basename(file);
 					if (file.indexOf('server') !== -1) {
 						configFileLoaded = require(file).default(app);
-						// configFileLoaded = require(file).default(app);
 					}
 				}
 			}
@@ -80,6 +53,38 @@ class Server {
 			throw new Error(error);
 		}
 
+	}
+
+
+	/**
+	 * return app
+	 * 
+	 * @return {any} this.app 
+	 */
+	public getHttpServer(): any {
+		return this.app;
+	}
+	
+
+	/**
+	 * return router for app
+	 * 
+	 */
+	public getRouter(): any {
+		return this.router;
+	}
+
+
+	/**
+	 * up and run server.
+	 * 
+	 */
+	public upServer(): void {
+		this.app.use(this.router)
+		this.app.server = Http.createServer(this.app);
+		this.app.server.listen(process.env.port, () => {
+			console.log(`Running ${process.env.port}`)
+		});
 	}
 
 

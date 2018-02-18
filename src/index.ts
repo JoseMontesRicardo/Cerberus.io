@@ -1,5 +1,6 @@
 import { Server } from './@core/server';
-import { LoaderUtil, ConnectionUtil } from './@core/utils';
+import { LoaderUtil } from './@core/utils';
+import { ConnectionHelper } from './@core/helpers';
 import { BaseRoute } from './@core/base';
 
 (async () => {
@@ -9,20 +10,15 @@ import { BaseRoute } from './@core/base';
 
 	//server
 	let serveObj = new Server();
-	let connectionUtil = new ConnectionUtil();
 
-	let connections = await connectionUtil.startConnections();
-	console.log(connections)
-
+	let connectionHelper = new ConnectionHelper();
+	global.Connections = await connectionHelper.startConnections();
+	console.log(global.Connections);
 
 	let httpServer = serveObj.getHttpServer();
 	let router = serveObj.getRouter();
 
 	LoaderUtil.loadAllRoutes(router)
-
-	router.get('/', (req, res) => {
-		res.send('hola');
-	})
 
 	serveObj.upServer();
 })();

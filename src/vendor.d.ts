@@ -3,5 +3,6 @@ declare module NodeJS  {
         extensionLoader: string,
         tempSrcPath: string,
         BaseRoute: any,
+        Connections: any
     }
 }
