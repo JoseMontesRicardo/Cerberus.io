@@ -21,6 +21,7 @@ class Test1Route extends BaseRoute {
 		this.put(`/${this.nameRoute}/:id`, 'Test1Controller->update');
 		this.delete(`/${this.nameRoute}/:id`, 'Test1Controller->destroy');
 	}
+
 }
 
 export default Test1Route;
