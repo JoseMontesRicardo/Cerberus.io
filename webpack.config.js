@@ -1,7 +1,11 @@
 const path = require('path');
 const glob = require('glob');
+const nodeExternals = require('webpack-node-externals');
+
 
 module.exports = {
+	target: 'node',//node config
+	externals: [nodeExternals()],//ignore node_modules
 	entry: {
 		path: glob.sync('./src/**/*.ts'),
 	},
@@ -20,6 +24,6 @@ module.exports = {
 	},
 	output: {
 		filename: 'bundle.js',
-		path: path.resolve(__dirname, 'dist')
+		path: path.resolve(__dirname, 'dist2')
 	}
 };

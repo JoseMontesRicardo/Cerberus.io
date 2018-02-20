@@ -5,9 +5,10 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack",
+    "build": "tsc",
+    "build-wp": "webpack",
     "watcher": "nodemon ./src/index.ts --exec ts-node",
-    "server": "node ./dist/bundle.js"
+    "server": "port=5500 node_env=production node ./dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -21,17 +22,34 @@
   },
   "homepage": "https://github.com/JoseMontesRicardo/Cerberus.io#readme",
   "dependencies": {
+    "app-root-path": "^2.0.1",
+    "body-parser": "^1.18.2",
+    "chalk": "^2.3.1",
+    "cookie-parser": "^1.4.3",
     "cors": "^2.8.4",
     "express": "^4.16.2",
     "glob": "^7.1.2",
-    "nodemon": "^1.14.12"
+    "js-yaml": "^3.10.0",
+    "lodash": "^4.17.5",
+    "mongorito": "^3.0.4",
+    "mysql2": "^1.5.2",
+    "nodemon": "^1.14.12",
+    "sequelize": "^4.33.4"
   },
   "devDependencies": {
+    "@types/app-root-path": "^1.2.4",
+    "@types/body-parser": "^1.16.8",
+    "@types/chalk": "^2.2.0",
+    "@types/cookie-parser": "^1.4.1",
     "@types/cors": "^2.8.3",
     "@types/express": "^4.11.1",
+    "@types/js-yaml": "^3.10.1",
+    "@types/lodash": "^4.14.102",
+    "@types/sequelize": "^4.27.6",
     "ts-loader": "^3.4.0",
     "ts-node": "^4.1.0",
     "typescript": "^2.7.1",
-    "webpack": "^3.10.0"
+    "webpack": "^3.10.0",
+    "webpack-node-externals": "^1.6.0"
   }
 }
