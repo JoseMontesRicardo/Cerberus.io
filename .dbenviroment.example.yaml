@@ -2,18 +2,21 @@
 db:
     default: "connection1"
 
+    # connections list
     connections:
+
+        # Example with mysql
         - connection1:
             #package
             package: "sequelize"
             #data base
-            data-base:	"schema1"
+            data-base:	"YOUR DATABASE"
             #user
-            user:	"root"
+            user:	"YOUR USER"
             #pass
-            pass:	"123456"
+            pass:	"YOUR PASS"
             #host
-            host:	"localhost"
+            host:	"DEFAULT HOST"
             #sequalize dialect
             dialect:	"mysql"
             #driver
@@ -23,11 +26,12 @@ db:
 
 
 
+        # Example with mongodb
         - connection2:
             package: "mongorito"
-            data-base:	"crawler"
+            data-base:	"YOUR DATABASE"
             user:	""
             pass:	""
-            host:	"localhost"
+            host:	"DEFAULT HOST"
             #mongodb port
             port:	27017
