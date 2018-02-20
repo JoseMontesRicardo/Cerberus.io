@@ -13,7 +13,7 @@ import { BaseRoute } from './@core/base';
 
 	let connectionHelper = new ConnectionHelper();
 	global.Connections = await connectionHelper.startConnections();
-	console.log(global.Connections);
+	// console.log(global.Connections);
 
 	let httpServer = serveObj.getHttpServer();
 	let router = serveObj.getRouter();
